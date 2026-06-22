@@ -5,22 +5,22 @@ def analyze_risk(input_data: str):
     high_risk_keywords = ["fraud", "hack", "scam", "illegal", "attack"]
     medium_risk_keywords = ["delay", "issue", "error", "problem"]
 
-    score = 0.1
-    level = "LOW"
-    explanation = "Normal behavior detected."
+def analyze_risk(transaction_count,
+                 pass_through_ratio,
+                 linked_accounts):
 
-    for word in high_risk_keywords:
-        if word in text:
-            score = 0.9
-            level = "HIGH"
-            explanation = "High-risk pattern detected in input."
-            return score, level, explanation
+    score = 0
 
-    for word in medium_risk_keywords:
-        if word in text:
-            score = 0.5
-            level = "MEDIUM"
-            explanation = "Some suspicious indicators found."
-            return score, level, explanation
+    score += transaction_count * 2
 
-    return score, level, explanation
+    score += pass_through_ratio * 50
+
+    score += linked_accounts * 5
+
+    if score > 80:
+        return "HIGH"
+
+    elif score > 40:
+        return "MEDIUM"
+
+    return "LOW"
